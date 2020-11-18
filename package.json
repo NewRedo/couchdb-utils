@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/NewRedo/couch-db-utils#readme",
   "dependencies": {
+    "json-stable-stringify": "^1.0.1",
+    "mississippi": "^4.0.0",
     "pouchdb": "^7.2.2"
   }
 }
