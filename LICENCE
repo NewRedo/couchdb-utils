@@ -1,4 +1,3 @@
-/*
 MIT Licence
 
 Copyright (c) 2020 NewRedo Ltd
@@ -20,36 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-*/
-
-"use strict";
-
-const stream = require("stream");
-
-/** A writable stream for streaming data into CouchDB. */
-class CouchDbWriteStream extends stream.Writable {
-
-    /**
-     * Creates a new CouchDbWriteStream.
-     *
-     * @param {object} db - PouchDb instance.
-     */
-    constructor(db) {
-        super({
-            objectMode: true
-        });
-        this._db = db;
-    }
-
-    /** Writes a single chunk. */
-    _write(chunk, encoding, callback) {
-        this._db.put(chunk, (err) => {
-            if (!err) {
-                this.emit("document-write");
-            }
-            callback(err);
-        });
-    }
-}
-
-module.exports = CouchDbWriteStream;
