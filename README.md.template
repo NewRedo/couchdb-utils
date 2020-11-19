@@ -1,0 +1,11 @@
+# couch-db-utils
+
+## Usage
+
+```javascript
+const CouchDbUtils = require("couch-db-utils");
+```
+
+## API Documentation
+
+${ apiDocs }

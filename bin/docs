@@ -1,0 +1,32 @@
+#!/usr/bin/env node
+
+const fs = require("fs");
+const jsdocToMarkdown = require("jsdoc-to-markdown");
+const path = require("path");
+
+const projectBaseDir = path.join(__dirname, "..");
+
+function run() {
+    const template = fs.readFileSync(path.join(
+        projectBaseDir,
+        "README.md.template"
+    )).toString();
+
+    const apiDocs = jsdocToMarkdown.renderSync({
+        files: [
+            path.join(
+                __dirname,
+                "..",
+                "lib",
+                "couch-db-utils.js"
+            )
+        ],
+        "heading-depth": 3
+    });
+
+    const docs = template.replace("${ apiDocs }", apiDocs);
+
+    fs.writeFileSync(path.join(projectBaseDir, "README.md"), docs);
+}
+
+run();
