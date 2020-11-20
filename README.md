@@ -38,10 +38,8 @@ Performs a one-time replication, filtering out design documents.
 #### CouchDbUtils.mutateAllDocs(options) ⇒ <code>Promise</code>
 Mutates all documents in a given database. Will throw an error and halt if
 any of the following conditions are true:
-  1. The document is a design document.
-  2. The mutator does not change the document.
-  3. A validator is provided and the document is invalid.
-  4. options.verifyIdempotent is true and the mutation is not idempotent.
+  1. A validator is provided and the document is invalid.
+  2. options.verifyIdempotent is true and the mutation is not idempotent.
 
 **Kind**: static method of [<code>CouchDbUtils</code>](#CouchDbUtils)  
 **Returns**: <code>Promise</code> - Resolves upon successful mutation of all documents.  
