@@ -32,6 +32,7 @@ Performs a one-time replication, filtering out design documents.
 | options | <code>object</code> |  |
 | options.source | <code>string</code> | Location of source CouchDB database. |
 | options.target | <code>string</code> | Location of target CouchDB database. |
+| options.eventEmitter | <code>object</code> | Optional event emitter for     reporting progress. If provided, it will periodically emit "progress"     events with a single "message" string. |
 
 <a name="CouchDbUtils.mutateAllDocs"></a>
 
