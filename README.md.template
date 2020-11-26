@@ -1,9 +1,9 @@
-# couch-db-utils
+# couchdb-utils
 
 ## Usage
 
 ```javascript
-const CouchDbUtils = require("couch-db-utils");
+const CouchDbUtils = require("couchdb-utils");
 ```
 
 ## API Documentation

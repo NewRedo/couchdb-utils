@@ -1,5 +1,5 @@
 {
-  "name": "couch-db-utils",
+  "name": "couchdb-utils",
   "version": "0.0.1",
   "description": "CouchDB utilities",
   "main": "index.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NewRedo/couch-db-utils.git"
+    "url": "git+https://github.com/NewRedo/couchdb-utils.git"
   },
   "author": "NewRedo Ltd",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/NewRedo/couch-db-utils/issues"
+    "url": "https://github.com/NewRedo/couchdb-utils/issues"
   },
-  "homepage": "https://github.com/NewRedo/couch-db-utils#readme",
+  "homepage": "https://github.com/NewRedo/couchdb-utils#readme",
   "dependencies": {
     "json-stable-stringify": "^1.0.1",
     "mississippi": "^4.0.0",
