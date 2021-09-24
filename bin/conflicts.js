@@ -1,9 +1,20 @@
-var PouchDB = require('pouchdb');
-PouchDB.plugin(require('pouchdb-find'));
-var fs = require('fs');
+/*
+ * Extracts conflicting documents in json files and puts the files in the 
+ * current working directory.
+ * 
+ * Syntax:
+ * node conflicts.js <database url>
+ */
 
-var path = process.argv.slice(2);
-var db = new PouchDB(path[0]);
+"use strict";
+
+const PouchDB = require('pouchdb');
+PouchDB.plugin(require('pouchdb-find'));
+const fs = require('fs');
+const { strict } = require('assert');
+
+const path = process.argv[2];
+const db = new PouchDB(path);
 
 (async function() {
     const conflicts = await db.find({
@@ -15,20 +26,14 @@ var db = new PouchDB(path[0]);
         "limit": 100 
     });
     for(let doc_id of conflicts.docs) {
-        const doc = await db.get(doc_id._id);
-        filename = doc_id._id + ' rev:' + doc_id._rev + ' primary' + '.txt';
-        fs.writeFileSync(filename, JSON.stringify(doc, null, 4), function(err) {
-            if(err) return console.error(err);
-        });
+        const doc = await db.get(doc_id._id, {rev:doc_id._rev});
+        const filename = `${doc._id} rev-${doc._rev} primary.json`;
+        fs.writeFileSync(filename, JSON.stringify(doc, null, 4));
         
         for (let conflict of doc_id._conflicts) {
-            console.log(conflict);
-
-            cfilename = doc_id._id + ' rev:' + doc_id._rev + ' conflict' + conflict + '.txt';
-            const conf = await db.get(doc_id._id, {rev:conflict});
-            fs.writeFileSync(cfilename, JSON.stringify(conf, null, 4), function(err) {
-                if(err) return console.error(err);
-            });
+            const doc = await db.get(doc_id._id, {rev:conflict});
+            const filename = `${doc._id} rev-${doc._rev} conflict.json`;
+            fs.writeFileSync(filename, JSON.stringify(doc, null, 4));
         }
     }
 })().catch(console.warn);
